@@ -75,11 +75,24 @@ body {
 /* Center card */
 .wrap {
   position: relative;
-  min-height: 100%;
-  display: grid;
-  place-items: center;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding: 24px;
 }
+
+@media (max-width: 600px) {
+  .wrap {
+    min-height: 100vh;
+    padding: 8px;
+  }
+  .card {
+    padding: 32px 8px;
+    width: 98vw;
+  }
+}
+
 .card {
   position: relative;
   width: min(680px, 92vw);
