@@ -5,7 +5,7 @@ const colors = ["#ff2e6a", "#ff6b9a", "#ffc2d1", "#ff8fab", "#f72585"];
 function spawnHeart() {
   const h = document.createElement("div");
   h.className = "heart";
-  const size = 10 + Math.random() * 18; // 10-28px
+  const size = 12 + Math.random() * 16; // 12-28px
   h.style.width = h.style.height = size + "px";
   h.style.left = Math.random() * 100 + "vw";
   h.style.bottom = "-30px";
@@ -13,6 +13,12 @@ function spawnHeart() {
   h.style.animationDuration = 6 + Math.random() * 6 + "s";
   h.style.animationDelay = Math.random() * 1 + "s";
   h.style.filter = `blur(${Math.random() * 0.5}px)`;
+
+  // Đảm bảo pseudo-elements cũng có kích thước phù hợp
+  const beforeAfterSize = size;
+  h.style.setProperty("--heart-size", beforeAfterSize + "px");
+  h.style.setProperty("--heart-offset", beforeAfterSize / 2 + "px");
+
   container.appendChild(h);
   setTimeout(() => h.remove(), 14000);
 }
@@ -20,3 +26,17 @@ function spawnHeart() {
 // Nhịp tim tạo hạt
 setInterval(spawnHeart, 220);
 for (let i = 0; i < 20; i++) setTimeout(spawnHeart, i * 80); // preload một ít
+
+// Xử lý mở phong bì
+const envelope = document.getElementById("envelope");
+const letterContent = document.getElementById("letterContent");
+
+envelope.addEventListener("click", function () {
+  // Đánh dấu phong bì đã mở
+  envelope.classList.add("opened");
+
+  // Hiện nội dung bức thư
+  setTimeout(() => {
+    letterContent.classList.add("visible");
+  }, 300);
+});
